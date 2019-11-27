@@ -1,0 +1,19 @@
+body {
+    width: 250px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+}
+
+.timer {
+    width: 200px;
+    height: 200px;
+    margin: 25px;
+
+    background-color: red;
+    border-radius: 110px;
+}
+
+.clockbutton {
+    padding: 30px;
+}
