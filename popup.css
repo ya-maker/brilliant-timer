@@ -8,10 +8,6 @@ body {
 .timer {
     width: 200px;
     height: 200px;
-    margin: 25px;
-
-    background-color: red;
-    border-radius: 110px;
 }
 
 .clockbutton {
