@@ -13,3 +13,7 @@ body {
     background-color: red;
     border-radius: 110px;
 }
+
+.clockbutton {
+    padding: 30px;
+}
