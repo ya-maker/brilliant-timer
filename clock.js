@@ -11,7 +11,7 @@ window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
  * Field variables
  */
 const clockCanvas = document.getElementById("clockface");
-const context = clockCanvas.getContext("2d");
+const clockContext = clockCanvas.getContext("2d");
 const ClockFaceOffset = Object.freeze({
   "ONE":    { x: 5, y: -2, deg: 30 },
   "TWO":    { x: 7, y: -2, deg: 60 },
@@ -60,7 +60,7 @@ function drawRedClockForeground(canvas, context, centerLocX, centerLocY, radius,
   // Arc Endpoint -> Center
   if(endDegrees != 360)
     context.lineTo(centerLocX, centerLocY);
-  context.stroke();
+  // context.stroke();
 }
 
 /**
@@ -102,6 +102,22 @@ function getClockspitLocation(centerLocX, centerLocY, radius, degree) {
 }
 
 
+function drawClockSpit(offsetObj, spitUnit) {
+  let clockSpitText = spitUnit;
+  Object.keys(offsetObj).forEach((offsetName, offsetIndex) => {
+    drawClockFace(
+      clockContext,
+      ClockInfo.Center.X,
+      ClockInfo.Center.Y,
+      ClockInfo.Radius,
+      offsetName,
+      clockSpitText.toString()
+    );
+
+    clockSpitText += spitUnit;
+  });
+}
+
 /**
  * Main execution
  */
@@ -118,23 +134,72 @@ let clockTimeEachSpit = clockTime / 12;
 
 drawRedClockForeground(
   clockCanvas,
-  context,
+  clockContext,
   ClockInfo.Center.X,
   ClockInfo.Center.Y,
   ClockInfo.Radius,
   360
 );
 
-let clockSpitText = clockTimeEachSpit;
-Object.keys(ClockFaceOffset).forEach((offsetName, offsetIndex) => {
-  drawClockFace(
-    context,
+// Draw spit text
+drawClockSpit(ClockFaceOffset, clockTimeEachSpit);
+
+/**
+ * Button Behaviour
+ */
+let startPauseBtn = document.getElementById("startPauseBtn");
+let resetBtn = document.getElementById("resetBtn");
+
+// Start button behaviour
+let isRunning = false;
+let totalTick = clockTime * 60; // total ticks in seconds
+let currentTick = totalTick;
+let intervalId = -1;
+
+/**
+ * Start Button Click Behaviour
+ */
+startPauseBtn.onclick = function() {
+  if(!isRunning)
+  {
+    startPauseBtn.textContent = "Stop";
+    isRunning = true;
+    intervalId = setInterval(function() {
+      console.log("Drawing " + currentTick / totalTick * 360 + " degree");
+      drawRedClockForeground(
+        clockCanvas,
+        clockContext,
+        ClockInfo.Center.X,
+        ClockInfo.Center.Y,
+        ClockInfo.Radius,
+        --currentTick / totalTick * 360
+      );
+      drawClockSpit(ClockFaceOffset, clockTimeEachSpit);
+    }, 1000);
+  }
+  else if(intervalId != -1)
+  {
+    startPauseBtn.textContent = "Start";
+    isRunning = false;
+    clearInterval(intervalId);
+  }
+};
+
+/**
+ * Reset Button Click Behaviour
+ */
+resetBtn.onclick = function() {
+  if(intervalId != -1)
+    clearInterval(intervalId);
+  startPauseBtn.textContent = "Start";
+  isRunning = false;
+  drawRedClockForeground(
+    clockCanvas,
+    clockContext,
     ClockInfo.Center.X,
     ClockInfo.Center.Y,
     ClockInfo.Radius,
-    offsetName,
-    clockSpitText.toString()
+    360
   );
-
-  clockSpitText += clockTimeEachSpit;
-});
+  drawClockSpit(ClockFaceOffset, clockTimeEachSpit);
+};
