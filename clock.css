@@ -1,0 +1,36 @@
+body {
+    width: 250px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+}
+
+.timer {
+    width: 200px;
+    height: 200px;
+    margin: 25px;
+
+    background-color: red;
+    border-radius: 110px;
+}
+
+#back-link {
+    background: url('images/back.png');
+    background-size: cover;
+
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    
+    width: 32px;
+    height: 32px;
+}
+
+#back-link:hover {
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#back-link:active {
+    background-color: rgba(0, 0, 0, 0.24);
+}
