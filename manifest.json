@@ -2,11 +2,6 @@
     "name": "Brilliant Timer",
     "version": "0.1",
     "description": "Brilliant Timer! 2019 Yabam Coders",
-    "permissions": ["activeTab", "declarativeContent", "storage"],
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-    },
     "page_action": {
         "default_popup": "popup.html",
         "default_icon": {
