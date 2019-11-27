@@ -15,5 +15,34 @@ body {
 }
 
 .clockbutton {
-    padding: 30px;
+    /* padding: 27px; */
+    border: 1px solid black;
+    text-align: center;
+    font-family: '양진체';
+    
 }
+
+.clockbutton:hover {
+    /* padding: 27px; */
+    box-shadow: 10px 10px 20px gray;
+    
+}
+
+.clockbutton a{
+    display: block;
+    padding: 27px;
+   
+}
+
+.clockbutton a:link{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.clockbutton a:hover{
+    color: coral;
+
+}
+
+@font-face { font-family: '양진체'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: normal; font-style: normal; }
