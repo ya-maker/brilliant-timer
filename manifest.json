@@ -1,8 +1,8 @@
 {
     "name": "Brilliant Timer",
-    "version": "1.8",
+    "version": "1.9",
     "description": "Brilliant Timer! 2019 Yabam Coders",
-    "page_action": {
+    "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
           "16": "images/icon-16.png",
